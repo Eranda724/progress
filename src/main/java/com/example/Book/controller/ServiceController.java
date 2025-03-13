@@ -18,10 +18,10 @@ public class ServiceController {
 
     private List<Service> Service = new ArrayList<>(
             List.of(
-                    new Service("Navin", 60),
-                    new Service("Kiran", 65)));
+                    new Service("Navin", "Service1", true),
+                    new Service("Kiran", "Service2", true)));
 
-    @GetMapping("/students")
+    @GetMapping("/service")
     public List<Service> getStudents() {
         return Service;
     }
@@ -32,10 +32,10 @@ public class ServiceController {
 
     }
 
-    @PostMapping("/students")
-    public Service addStudent(@RequestBody Service student) {
-        Service.add(student);
-        return student;
+    @PostMapping("/service")
+    public Service addStudent(@RequestBody Service service) {
+        Service.add(service);
+        return service;
     }
 
 }

@@ -2,11 +2,14 @@ package com.example.Book.model;
 
 public class Service {
     private String name;
-    private int marks;
+    private String type;
+    private boolean special;
 
-    public Service(String name, int marks) {
+
+    public Service(String name, String type, boolean special) {
         this.name = name;
-        this.marks = marks;
+        this.type = type;
+        this.special = special;
     }
 
     public String getName() {
@@ -17,19 +20,28 @@ public class Service {
         this.name = name;
     }
 
-    public int getMarks() {
-        return marks;
+    public String getType() {
+        return type;
     }
 
-    public void setMarks(int marks) {
-        this.marks = marks;
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public boolean getSpecial() {
+        return special;
+    }
+
+    public void setSpecial(boolean special) {
+        this.special = special;
     }
 
     @Override
     public String toString() {
         return "StudentController{" +
                 ", name='" + name + '\'' +
-                ", marks=" + marks +
+                ", marks=" + type + '\'' +
+                ", special=" + special + '\n' +
                 '}';
     }
 }
