@@ -1,13 +1,14 @@
 package com.example.Book.service;
 
-import com.example.Book.model.Users;
-import com.example.Book.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import com.example.Book.model.Users;
+import com.example.Book.repo.UserRepo;
 
 @Service
 public class UserService {
@@ -24,11 +25,19 @@ public class UserService {
     private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
 
     public Users register(Users user) {
-        user.setPassword(encoder.encode(user.getPassword()));
-        repo.save(user);
-        return user;
-    }
+        // Validate that password and confirm password match
+        if (!user.getPassword().equals(user.getConfirmpassword())) {
+            throw new IllegalArgumentException("Password and Confirm Password do not match");
+        }
 
+        user.setPassword(encoder.encode(user.getPassword()));
+        
+        // Clear the confirm password field (optional, but recommended)
+        user.setconfirmpassword(null);
+        
+        // Save the user to the database
+        return repo.save(user);
+    }
     public String verify(Users user) {
         Authentication authentication = authManager
                 .authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));

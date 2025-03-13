@@ -18,15 +18,19 @@ public class Users {
     @Column(nullable = false) // Added nullable=false to ensure password is required
     private String password;
 
+    @Column(nullable = false)
+    private String confirmpassword;
+
     // Default constructor required by JPA
     public Users() {
     }
 
     // Constructor with fields for easier object creation
-    public Users(String username, String email, String password) {
+    public Users(String username, String email, String password, String confirmpassword) {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.confirmpassword = confirmpassword;
     }
 
     public String getUsername() {
@@ -53,12 +57,23 @@ public class Users {
         this.password = password;
     }
 
+    public String getConfirmpassword() {
+        return confirmpassword;
+    }
+
+    public void setconfirmpassword(String confirmpassword) {
+        this.confirmpassword = password;
+    }
+
+
+
     @Override
     public String toString() {
         return "Users{" +
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
-                ", password='[PROTECTED]'" + // Changed to not expose password in logs
+                ", password='[PROTECTED]'" +
+                ", confirmpassword='[PROTECTED]'" +
                 '}';
     }
 }
